@@ -57,7 +57,7 @@ class _MySignInPageState extends State<MySignInPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: EdgeInsets.only(bottom: 10),
               child: Text('GardenCare',
                   style: TextStyle(
                       fontSize: 40,
@@ -66,8 +66,12 @@ class _MySignInPageState extends State<MySignInPage> {
                   )
               ),
             ),
-            Image(
-              image: NetworkImage('https://static.vecteezy.com/system/resources/thumbnails/000/370/369/small/3678.jpg')
+            Container(
+              width: 200,
+              height: 200,
+              child:Image(
+                  image: NetworkImage('https://img.freepik.com/free-vector/green-circle-leaves-frame-with-copyspace_1017-26910.jpg?t=st=1651431789~exp=1651432389~hmac=96b9c9027b40632c52977d27e382e57350dc12cf9320137aad04baed63e66187&w=900')
+              ),
             ),
             TextField(
               controller: usernameController,
