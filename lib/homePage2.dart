@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'detailsPage.dart';
 import 'main.dart';
-import 'settingsPage.dart';
-import 'schedulePage.dart';
-import 'searchPage.dart';
+import 'homepage.dart';
 
 class home2Page extends StatefulWidget {
   const home2Page({Key? key, required this.title}) : super(key: key);
@@ -16,6 +14,13 @@ class home2Page extends StatefulWidget {
 }
 
 class _home2PageState extends State<home2Page> {
+  void _moveScreen() {
+    setState(() {});
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyHomePage(title: "HomePage")),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +52,7 @@ class _home2PageState extends State<home2Page> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 100, bottom: 50),
+              margin: EdgeInsets.only(top: 100, bottom: 25),
               child: Image(
                   image: NetworkImage('https://static.vecteezy.com/system/resources/thumbnails/000/370/369/small/3678.jpg')
               ),
@@ -64,7 +69,7 @@ class _home2PageState extends State<home2Page> {
             Container(
                 margin: EdgeInsets.only(bottom: 100),
                 width: 250,
-                height: 120,
+                height: 60,
                 child: FutureBuilder(
                   future: _fetch(),
                   builder: (context, snapshot) {
@@ -84,6 +89,17 @@ class _home2PageState extends State<home2Page> {
                   },
                 ),
             ),
+            Container(
+              child: ElevatedButton(
+                onPressed: () {
+                  _updateGarden();
+                  _moveScreen();
+                },
+                child: Text(
+                    'Clear Garden'
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -102,5 +118,14 @@ class _home2PageState extends State<home2Page> {
         print(e);
       });
     };
+  }
+
+  _updateGarden() async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      FirebaseFirestore.instance.collection('Users')
+          .doc(firebaseUser.uid)
+          .update({'garden': ""});
+    }
   }
 }
