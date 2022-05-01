@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'firebase.dart';
 import 'users.dart';
 
 
@@ -52,6 +51,7 @@ class _MySignInPageState extends State<MySignInPage> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +108,6 @@ class _MySignInPageState extends State<MySignInPage> {
                     .then((value) {
                       print("Successful sign up");
                       UserManagement().storeNewUser(value.user, context);
-                      /*userSetup(usernameController.text, "John Doe", 30 , "City, State");*/
                 }).catchError((error) {
                   print("Failed to sign up");
                   print(error.toString());

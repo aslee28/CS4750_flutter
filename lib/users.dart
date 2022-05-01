@@ -9,7 +9,7 @@ class UserManagement {
     FirebaseFirestore.instance
         .collection('Users')
         .doc(firebaseUser!.uid)
-        .set({'email': user.email, 'uid': user.uid, 'name': 'John Doe', 'location': 'City, State', 'age': 30})
+        .set({'email': user.email, 'uid': user.uid, 'name': 'John Doe', 'location': 'City, State', 'age': "30", 'garden': ''})
         .then((value) => Navigator.push(
         context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Home'))))
         .catchError((e) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'settingsProfilePage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -11,17 +12,28 @@ class SettingsPage extends StatefulWidget {
 
 
 class _SettingsPageState extends State<SettingsPage> {
+  void _moveScreen() {
+    setState(() {
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => settingsProfilePage()),
+    );
+  }
   String uid = 'xxxx';
   String email = 'example@gmail.com';
   String location = 'City, State';
   String name = 'John Doe';
-  int age = 30;
+  String age = '30';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        centerTitle: true,
+        title: Text("Settings"),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.green,
         actions: [
           FlatButton.icon(
               onPressed: () {
@@ -44,38 +56,126 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FutureBuilder(
-                future: _fetch(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return Text("Loading data...Please wait");
-                  return Text("Name: $name");
-                },
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: Text(
+                  "Profile",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
               ),
-              FutureBuilder(
-                future: _fetch(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return Text("Loading data...Please wait");
-                  return Text("Email: $email");
-                },
+              Container(
+                child: Align(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    child: FutureBuilder(
+                      future: _fetch(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState != ConnectionState.done)
+                          return Text(
+                            "Loading data...Please wait",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          );
+                        return Text(
+                          "Name: $name",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ),
-              FutureBuilder(
-                future: _fetch(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return Text("Loading data...Please wait");
-                  return Text("Age : $age");
-                },
+              Container(
+                child: Align(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    child: FutureBuilder(
+                      future: _fetch(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState != ConnectionState.done)
+                          return Text(
+                            "Loading data...Please wait",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          );
+                        return Text(
+                          "Email: $email",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ),
-              FutureBuilder(
-                future: _fetch(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return Text("Loading data...Please wait");
-                  return Text("Location : $location");
-                },
+              Container(
+                child: Align(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    child: FutureBuilder(
+                      future: _fetch(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState != ConnectionState.done)
+                          return Text(
+                            "Loading data...Please wait",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          );
+                        return Text(
+                          "Age: $age",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ),
+              Container(
+                child: Align(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    child: FutureBuilder(
+                      future: _fetch(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState != ConnectionState.done)
+                          return Text(
+                            "Loading data...Please wait",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          );
+                        return Text(
+                          "Location: $location",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 40, bottom: 5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    _moveScreen();
+                  },
+                  child: Text(
+                      'Edit Profile'
+                  ),
+                ),
+              )
             ]
         )
       ),

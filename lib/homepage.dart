@@ -5,7 +5,7 @@ import 'settingsPage.dart';
 import 'schedulePage.dart';
 import 'searchPage.dart';
 import 'homePage2.dart';
-import 'settingsPage.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
   final screens = [
     home2Page(title: 'Homepage'),
-    schedulePage(title: 'Watering Schedule'),
+    schedulePage(title: "Watering Calendar"),
     searchPage(title: "Search Page"),
     SettingsPage(),
   ];
@@ -60,13 +60,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-  /*_fetch() async{
-    final firebaseUser = await FirebaseAuth.instance.currentUser;
-    if(firebaseUser != null)
-      await FirebaseFirestore.instance.collection('Users')
-          .doc(firebaseUser.uid)
-          .get()
-          .then((ds) {
-      })
-  }*/
 }

@@ -14,6 +14,7 @@ class _searchPageState extends State<searchPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
         title: Text("Search Demo"),
         actions: [

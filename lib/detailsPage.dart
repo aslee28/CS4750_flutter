@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'homePage2.dart';
 import 'homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+String garden = "";
 class DetailsPage extends StatefulWidget {
   const DetailsPage({this.data});
 
@@ -17,10 +18,20 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  void _moveScreen() {
+    setState(() {
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyHomePage(title: "Homepage")),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
+        centerTitle: true,
         title: Text(widget.data!.get('Name')),
       ),
       body: Center(
@@ -57,6 +68,10 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             ElevatedButton(
               onPressed: () {
+                String addGarden = widget.data!.get('Name').toString();
+                garden = garden + addGarden + ", ";
+                _updateGarden(garden);
+                _moveScreen();
               },
               child: Text(
                   'Add to list'
@@ -66,6 +81,14 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
       ),
     );
+  }
+  _updateGarden(String name) async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      FirebaseFirestore.instance.collection('Users')
+          .doc(firebaseUser.uid)
+          .update({'garden': name});
+    }
   }
 }
 
