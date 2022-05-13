@@ -2,6 +2,12 @@
 
 CS4750 Garden Phone App
 
+This app helps users start their own gardens! 
+Search through a wide variety of plants to determine what is best for your garden! 
+Set up a watering schedule for your garden!
+
+This app works uses Firebase for user authenication and holds data in a Firestore database.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
